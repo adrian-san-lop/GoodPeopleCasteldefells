@@ -13,33 +13,6 @@
     $main = $(".main");
     $content = $(".content");
 
-    // Reveal elements progressively as they enter the viewport.
-    const revealItems = document.querySelectorAll(".about .wrapper, .services .headingBx, .services .h3, .card, .contact .wrapper");
-    revealItems.forEach((item, index) => {
-      item.classList.add("reveal");
-      item.style.setProperty("--reveal-delay", `${Math.min(index * 70, 280)}ms`);
-    });
-
-    if ("IntersectionObserver" in window) {
-      const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 });
-      revealItems.forEach((item) => revealObserver.observe(item));
-    } else {
-      revealItems.forEach((item) => item.classList.add("is-visible"));
-    }
-
-    // Keep the mobile menu accessible and close it after navigation.
-    $check.attr("aria-expanded", "false");
-    $check.on("change", function() {
-      $(this).attr("aria-expanded", this.checked ? "true" : "false");
-    });
-
     // A $( document ).ready() block.
     $(document ).ready(function() {
       $content.fadeIn(5000, function(){
